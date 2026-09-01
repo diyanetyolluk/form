@@ -305,6 +305,68 @@
   .kabul-muhur{position:absolute;width:20mm;height:20mm;object-fit:contain;}
   .b-dipnot{text-align:center;font-weight:bold;font-size:3.1mm;padding-top:1.6mm;}
 
+  /* ---------- KAMU GÖREVLİSİNİN EKRANDAN ALINAN İMZASI ---------- */
+  .imza-govde .kg-imza{margin:1.2mm auto 0;display:block;
+    max-width:46mm;max-height:9.5mm;width:auto;height:auto;}
+  .belge.ek3 .cek-sol{position:relative;}
+  /* Bu formda EK-3 kağıda tam oturuyor; imza bloğu kutuyu BÜYÜTMEMELİ,
+     yoksa belge 3. sayfaya taşar. Ölçü boş yere göre sınırlandı. */
+  .belge.ek3 .cek-imza{height:5.8mm;display:flex;align-items:flex-end;justify-content:center;}
+  .belge.ek3 .cek-imza img{max-width:40mm;max-height:5.7mm;width:auto;height:auto;}
+
+  /* İmza paneli yalnız DOKUNMATİK cihazlarda (telefon / tablet) görünür.
+     Bilgisayarda yer kaplamasın diye gizlidir; imza atılmış bir kayıt
+     açıldığında JS "kgi-goster" ekler ve panel orada da görünür,
+     böylece imza bilgisayardan da silinebilir. */
+  .kgi-panel{display:none;}
+  @media (pointer:coarse){ .kgi-panel{display:block;} }
+  @media screen and (max-width:900px){ .kgi-panel{display:block;} }
+  .kgi-panel.kgi-goster{display:block;}
+
+  /* imza alma paneli */
+  .kgi-kutu{border:1px dashed #9aa8bb;border-radius:6px;background:#fbfcfe;min-height:64px;
+    display:flex;align-items:center;justify-content:center;padding:6px;margin:2px 0 8px;}
+  .kgi-kutu img{max-width:100%;max-height:80px;}
+  .kgi-bos{color:#8a93a0;font-size:11.5px;}
+  .kgi-dugmeler{display:flex;gap:6px;flex-wrap:wrap;}
+  .kgi-dugmeler .btn{flex:1;padding:10px 10px;font-size:12.5px;}
+
+  /* tam ekran imza penceresi */
+  .kgi-ort{position:fixed;inset:0;background:rgba(16,20,28,.74);z-index:300;
+    display:none;align-items:center;justify-content:center;padding:10px;}
+  .kgi-ort.acik{display:flex;}
+  .kgi-pen{background:#fff;border-radius:10px;width:100%;max-width:760px;
+    display:flex;flex-direction:column;max-height:100%;overflow:hidden;
+    box-shadow:0 12px 40px rgba(0,0,0,.35);}
+  .kgi-bas{background:var(--blue);color:#111;font-weight:bold;text-align:center;
+    padding:9px 10px;font-size:13px;line-height:1.35;}
+  .kgi-yonerge{font-size:11.5px;color:#555;text-align:center;padding:7px 12px 0;line-height:1.45;}
+  .kgi-ipucu{display:none;}
+  @media (max-width:640px) and (orientation:portrait){ .kgi-ipucu{display:block;color:#7a838f;} }
+  .kgi-tuval-sar{padding:8px 10px;position:relative;}
+  .kgi-cizgi{position:absolute;left:26px;right:26px;bottom:38px;
+    border-bottom:1px dashed #c3ccd8;pointer-events:none;}
+  .kgi-tuval{width:100%;height:230px;border:1px solid #8fa8cc;border-radius:6px;
+    background:#fff;touch-action:none;display:block;cursor:crosshair;}
+  .kgi-alt{display:flex;gap:8px;padding:0 10px 10px;}
+  .kgi-alt .btn{flex:1;padding:12px 8px;font-size:13px;}
+  @media (max-height:560px){ .kgi-tuval{height:150px;} .kgi-cizgi{bottom:30px;} }
+
+  /* ================= SENDİKALAR SEKMESİ ================= */
+  .sen-ekle{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 8px;}
+  .sen-ekle input{padding:7px 9px;border:1px solid var(--border);background:var(--yellow);
+    border-radius:3px;font-size:12px;min-width:0;}
+  .sen-ekle .sen-ad{flex:2 1 210px;} .sen-ekle .sen-no{flex:0 0 96px;} .sen-ekle .sen-adres{flex:3 1 240px;}
+  .sen-ekle .btn{flex:0 0 auto;padding:7px 14px;}
+  .sen-sar{overflow-x:auto;}
+  .sen-etiket{background:#e6f0ff;color:#1a4a86;border:1px solid #c3d8f2;border-radius:3px;
+    font-size:10px;padding:1px 5px;margin-left:5px;white-space:nowrap;}
+  .sen-kilit{color:#9aa3ad;font-size:13px;}
+  .sen-kisa{font-weight:bold;color:#1a4a86;white-space:nowrap;}
+  @media screen and (max-width:900px){
+    .sen-ekle input,.sen-ekle .btn{flex:1 1 100%;width:100%;}
+  }
+
   /* ================= KULLANIM KILAVUZU PENCERESİ ================= */
   .kilavuz-ort{position:fixed;inset:0;background:rgba(20,24,30,.55);z-index:280;
     display:none;align-items:flex-start;justify-content:center;padding:52px 16px 24px;}
@@ -606,6 +668,7 @@
     <div class="tabbtn" data-tab="s2"><svg class="ikon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/></svg>Çekilme Formu (EK-3)</div>
     <div class="tabbtn" data-tab="s6"><svg class="ikon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Personel</div>
     <div class="tabbtn" data-tab="s3"><svg class="ikon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Kayıtlı Üyeler</div>
+    <div class="tabbtn" data-tab="s8"><svg class="ikon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M10 21v-6h4v6"/></svg>Sendikalar</div>
     <div class="tabbtn" data-tab="s4"><svg class="ikon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Geçmiş Kayıtlar</div>
     <div class="tabbtn tabbtn-islem" id="btnKaydet" title="Formdaki bütün bilgileri kaydeder"><svg class="ikon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Kaydet</div>
     <div class="tabbtn" data-tab="s7"><svg class="ikon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Boş Form İndir</div>
@@ -635,6 +698,7 @@
   <div class="sheet" id="sheet-s2"><div id="s2-root"></div></div>
   <div class="sheet" id="sheet-s3"><div id="s3-root"></div></div>
   <div class="sheet" id="sheet-s4"><div id="s4-root"></div></div>
+  <div class="sheet" id="sheet-s8"><div id="s8-root"></div></div>
   <div class="sheet" id="sheet-s6"><div id="s6-root"></div></div>
   <div class="sheet" id="sheet-s7"><div id="s7-root"></div></div>
 
@@ -686,6 +750,25 @@
   <span>⚠ <b>Bu programın yapımcı bilgisi değiştirilmiş.</b> Özgün hâline döndürüldü —
   telif hakları <b>Mamak İlçe Müftülüğü V.H.K.İ. Abdullah GEDİK</b>'e aittir · 05056405180</span>
   <button type="button" class="tu-kapat" id="telifUyariKapat">Tamam</button>
+</div>
+
+<!-- ============ EKRANDAN İMZA PENCERESİ ============ -->
+<div class="kgi-ort no-print" id="kgiOrt">
+  <div class="kgi-pen">
+    <div class="kgi-bas" id="kgiBaslik">KAMU GÖREVLİSİNİN İMZASI</div>
+    <div class="kgi-yonerge">Aşağıdaki beyaz alana <b>parmağınızla</b> imzanızı atınız.
+      Beğenmezseniz <b>Temizle</b> ile silip yeniden atabilirsiniz.
+      <span class="kgi-ipucu">Telefonu yan çevirirseniz imza alanı genişler.</span></div>
+    <div class="kgi-tuval-sar">
+      <canvas class="kgi-tuval" id="kgiTuval"></canvas>
+      <div class="kgi-cizgi"></div>
+    </div>
+    <div class="kgi-alt">
+      <button type="button" class="btn secondary" id="kgiVazgec">Vazgeç</button>
+      <button type="button" class="btn gri" id="kgiTemizle">Temizle</button>
+      <button type="button" class="btn" id="kgiKaydet">✔ İMZAYI İŞLE</button>
+    </div>
+  </div>
 </div>
 
 <div class="app-toast" id="toast"></div>
@@ -920,6 +1003,8 @@ function bosDurum(){
     gsm:'', mail:'', kanGrubu:'',
     /* --- Üyeliğe kabul eden yetkili (başkan değişebilir) --- */
     kabulAd:KABUL_VARSAYILAN.ad, kabulUnvan:KABUL_VARSAYILAN.unvan, kabulBirim:KABUL_VARSAYILAN.birim,
+    /* --- Kamu görevlisinin ekrandan (parmak/kalem) alınan imzası: PNG data URL --- */
+    imzaGorsel:'',
     /* --- EK-3'e özel --- */
     cekilmeTarihi:'', cekilmeTarihNo:'', kurumaVerilisTarihi:'', evrakNo:''
   };
@@ -1078,6 +1163,9 @@ function belgeEK1(){
   +     '<div style="height:3.5mm"></div>'
   +     'Tarih: '+(t.g==='……' ? '……… / ……… / 20………' : t.g+'/'+t.a+'/'+t.y)
   +     '<div style="height:2mm"></div><span class="alt-cizgi">İMZA</span>'
+      /* Ekrandan alınan imza — "İMZA" yazısının altına, ortalı basılır */
+  +     (imzaGecerli(state.imzaGorsel)
+           ? '<img class="kg-imza" src="'+state.imzaGorsel+'" alt="imza">' : '')
   +   '</td>'
   +   '<td class="imza-govde" colspan="14" style="font-weight:bold;font-size:4.2mm;padding-top:6mm!important">'
   +     esc(buyuk(state.uyeKayitNo))+'</td>'
@@ -1261,7 +1349,10 @@ function belgeEK3(){
   +       'Üyeliğinden çekiliyorum<br>Gereğini arz ederim.</div>'
   +     '<div class="cek-bosluk"></div>'
   +     '<div>Tarih: '+nk(t)+'</div>'
-  +     '<div class="cek-bosluk"></div>'
+      /* Ekrandan alınan imza — "Kamu Görevlisinin İmzası" yazısının üstüne basılır */
+  +     (imzaGecerli(state.imzaGorsel)
+           ? '<div class="cek-imza"><img src="'+state.imzaGorsel+'" alt="imza"></div>'
+           : '<div class="cek-bosluk"></div>')
   +     '<div><span class="alt-cizgi">Kamu Görevlisinin İmzası</span></div>'
   +   '</td>'
   +   '<td class="cek-ust" colspan="32">FORMUN KURUMA VERİLİŞ TARİHİ : '+nk(kv)+'</td>'
@@ -1378,14 +1469,16 @@ function panelSendika(sfx){
   if(sfx === '2'){
     return '<div class="panel"><div class="panel-head">SENDİKA BİLGİLERİ</div><div class="panel-body">'
       + satir('Hizmet Kolu', metin('hizmetKolu','11',2,' inputmode="numeric"'))
-      + satir('Sendika Adı', metin('sendikaAdi','Örn: DİYANET-SEN',18))
-      + satir('Sendika Adresi', metin('sendikaAdresi','Örn: ALTINDAĞ/ANKARA',18))
+      + satir('Sendika Adı', comboAlan('sendikaAdi','sendikaCombo2','Seçmek için tıklayın ya da yazın'),
+              'Listeden seçince hizmet kolu, dosya no ve adres kendiliğinden dolar')
+      + satir('Sendika Adresi', metin('sendikaAdresi','Örn: MAMAK/ANKARA',18))
       + satir('Dosya No', metin('dosyaNo','018',3,' inputmode="numeric"'))
       + '<div class="field-row" style="border-bottom:none;padding-top:5px">'
       +   '<button type="button" class="btn gri" id="dsenDoldur" style="width:100%">'
       +   'DİYANET-SEN bilgilerini yaz</button></div>'
-      + '<div class="bilgi-not">Çekilme formu her sendikada ortak kullanıldığı için bu dört alan '
-      +   '<b>elle doldurulur</b>. Resmî formda adres 18 kutudur; kısa yazınız (örn. ALTINDAĞ/ANKARA).</div>'
+      + '<div class="bilgi-not"><b>Sendika Adı</b> kutusuna tıklayın: <b>Sendikalar</b> sekmesindeki liste açılır, '
+      +   'seçtiğiniz sendikanın <b>hizmet kolu, dosya no ve adresi</b> kendiliğinden yazılır. '
+      +   'Listede olmayan bir sendikayı <b>Sendikalar</b> sekmesinden ekleyebilir ya da buraya elle yazabilirsiniz. Resmî formda adres 18 kutudur; kısa yazınız (örn. MAMAK/ANKARA).</div>'
       + '</div></div>';
   }
   return '<div class="panel"><div class="panel-head">SENDİKA BİLGİLERİ</div><div class="panel-body">'
@@ -1461,6 +1554,37 @@ function panelEK1(){
     +   '<b>ÜYELİĞE KABUL</b> kutusuna bu bilgiler basılır.</div>'
     + '</div></div>';
 }
+/* ------------------------------------------------------------
+   KAMU GÖREVLİSİNİN İMZASI
+   Personel telefon/tablet ekranına parmağıyla imza atar; imza
+   PNG olarak durumda saklanır ve belgeye basılır.
+   ------------------------------------------------------------ */
+function imzaGecerli(v){
+  return typeof v === 'string' && v.indexOf('data:image/') === 0 && v.length > 64;
+}
+function imzaOnizleme(d){
+  return imzaGecerli(d.imzaGorsel)
+    ? '<img src="'+d.imzaGorsel+'" alt="imza">'
+    : '<span class="kgi-bos">Henüz imza alınmadı</span>';
+}
+function panelImza(sfx){
+  sfx = sfx || '';
+  const hangi = (sfx === '2') ? 'EK3' : 'EK1';
+  const d = (sfx === '2') ? durumEK3 : durumEK1;
+  return '<div class="panel kgi-panel" id="kgiPanel'+sfx+'">'
+    + '<div class="panel-head blue">KAMU GÖREVLİSİNİN İMZASI</div><div class="panel-body">'
+    + '<div class="kgi-kutu" id="kgiOnizle'+sfx+'">'+imzaOnizleme(d)+'</div>'
+    + '<div class="kgi-dugmeler">'
+    +   '<button type="button" class="btn" data-kgi-al="'+hangi+'">✍️ EKRANA İMZA AT</button>'
+    +   '<button type="button" class="btn danger" data-kgi-sil="'+hangi+'" style="flex:0 0 78px">Sil</button>'
+    + '</div>'
+    + '<div class="bilgi-not">Telefonu/tableti personele uzatın; <b>parmağıyla</b> (ya da kalemle) '
+    +   'ekrana imzasını atsın. İmza belgedeki <b>imza yerine</b> basılır, kişinin kaydıyla birlikte '
+    +   'saklanır ve yedeğe girer. Bu panel yalnızca <b>telefon ve tablette</b> çıkar; '
+    +   'bilgisayarda yalnız imza atılmış bir kayıt açıkken görünür.</div>'
+    + '</div></div>';
+}
+
 function panelEK3(){
   return '<div class="panel"><div class="panel-head blue">ÜYELİKTEN ÇEKİLME</div><div class="panel-body">'
     + satir('Çekilme Beyan Tarihi', tarihAlan('cekilmeTarihi'), 'Kamu görevlisinin çekilme bildirimini imzaladığı tarih')
@@ -1487,7 +1611,7 @@ function kurSheet1(){
     '<div class="layout">'
     + '<div>'
     +   '<div class="panel" style="border-bottom-width:0"><div class="panel-head">VERİ GİRİŞİ — EK 1 ÜYELİK FORMU</div></div>'
-    +   panelSendika() + panelKurum('') + panelUyelik('') + panelSgk('') + panelEK1()
+    +   panelSendika() + panelKurum('') + panelUyelik('') + panelSgk('') + panelEK1() + panelImza('')
     +   iletisimNotu()
     + '</div>'
     + '<div>' + belgeAraci()
@@ -1510,7 +1634,7 @@ function kurSheet2(){
     + '<div>'
     +   '<div class="panel" style="border-bottom-width:0"><div class="panel-head">VERİ GİRİŞİ — EK 3 ÇEKİLME FORMU</div></div>'
     +   '<div class="bilgi-not" style="padding:0 0 8px">Bu form <b>üyelikten çekilen</b> kişi için doldurulur ve <b>üyelik formundan tamamen bağımsızdır</b> — buraya yazdığınız bilgiler EK-1\'e geçmez. Yazdırınca <b>2 sayfa</b> çıkar: form ve arkasındaki açıklamalar.</div>'
-    +   panelSendika('2') + panelKurum('2') + panelUyelik('2') + panelSgk('2') + panelEK3()
+    +   panelSendika('2') + panelKurum('2') + panelUyelik('2') + panelSgk('2') + panelEK3() + panelImza('2')
     +   iletisimNotu()
     + '</div>'
     + '<div>' + belgeAraci()
@@ -1524,6 +1648,7 @@ function kurSheet2(){
   comboKur('ilCombo2',   ()=>IL_LISTESI, 'ilAdi');
   comboKur('ilceCombo2', ()=>ilceListesi(durumEK3.ilAdi), 'ilceAdi');
   comboKur('unvanCombo2',()=>UNVAN_LISTESI, 'kadroUnvani');
+  comboKur('sendikaCombo2', ()=>sendikaAdListesi(), 'sendikaAdi', sendikaSecildi);
   personelSeciciKur('adSecici2');
 }
 
@@ -1536,7 +1661,7 @@ function ilceListesi(il){
 }
 
 /* ---------- Açılır liste (combo) ---------- */
-function comboKur(id, listeFn, k){
+function comboKur(id, listeFn, k, sonra){
   const kok = document.getElementById(id);
   if(!kok) return;
   const kendiDurum = elemanDurumu(kok);
@@ -1562,6 +1687,8 @@ function comboKur(id, listeFn, k){
     const temiz = String(v).replace(/\s*\(Merkez\)$/,'');
     inp.value = temiz;
     ileDurum(kendiDurum, ()=>degerYaz(k, temiz));
+    /* seçimden sonra ek iş (örn. sendika seçilince diğer alanları doldurmak) */
+    if(typeof sonra === 'function'){ try{ sonra(temiz); }catch(e){} }
     kapat(); yenile();
   }
 
@@ -1620,8 +1747,20 @@ function yenile(){
   const b2e = document.getElementById('belgeEK3Ek');
   if(b2e && !b2e.innerHTML) b2e.innerHTML = belgeEK3Aciklama();
   panelleriEsitle();
+  imzaOnizlemeTazele();
   tasmaUyar();
   taslakKaydet();
+}
+
+/* İmza panelindeki küçük önizlemeyi tazele; paneli gerekince görünür kıl */
+function imzaOnizlemeTazele(){
+  [['', durumEK1], ['2', durumEK3]].forEach(function(c){
+    const kutu = document.getElementById('kgiOnizle'+c[0]);
+    if(kutu) kutu.innerHTML = imzaOnizleme(c[1]);
+    const panel = document.getElementById('kgiPanel'+c[0]);
+    /* Bilgisayarda panel gizlidir; imza varsa görünsün ki silinebilsin */
+    if(panel) panel.classList.toggle('kgi-goster', imzaGecerli(c[1].imzaGorsel));
+  });
 }
 
 /* Aynı alanın iki sayfadaki kopyalarını eşitle */
@@ -1681,7 +1820,11 @@ function yaz(anahtar, veri){
 function uyeler(){ return oku(ANH_UYE); }
 function gecmis(){ return oku(ANH_GECMIS); }
 
-function taslakKaydet(){
+/* Program artık "kaldığınız yerden" açılmaz: her açılışta formlar bomboş
+   başlar. Bu yüzden taslak yazılmaz; eski sürümden kalan taslak silinir.
+   Kayıtlı Üyeler, Geçmiş, Personel ve Sendikalar bundan etkilenmez. */
+function taslakKaydet(){ }
+function taslakKaydetEski(){
   try{ localStorage.setItem(ANH_TASLAK, JSON.stringify({
     ek1: durumEK1, ek3: durumEK3, kimlik: kayitKimlik
   })); }catch(e){}
@@ -1837,7 +1980,8 @@ const ALAN_ADLARI = [
   ['gsm','Gsm'],['mail','Mail'],['kanGrubu','Kan Grubu'],
   ['kabulAd','Üyeliğe Kabul Eden'],['kabulUnvan','Yetkilinin Unvanı'],['kabulBirim','Yetkilinin Alt Bilgisi'],
   ['cekilmeTarihi','Çekilme Beyan Tarihi'],['kurumaVerilisTarihi','Formun Kuruma Veriliş Tarihi'],
-  ['evrakNo','Kurumca Verilen Evrak No']
+  ['evrakNo','Kurumca Verilen Evrak No'],
+  ['imzaGorsel','Ekrandan Alınan İmza']
 ];
 function alanDeger(k, v){
   const d = v[k];
@@ -1846,6 +1990,12 @@ function alanDeger(k, v){
   if(k==='ogrenim')  return esc(d+' — '+(OGRENIM_ETIKET[d]||''));
   if(k==='sgkTur')   return esc(d+' — '+(SGK_ETIKET[d]||''));
   if(/Tarihi$/.test(k)) return esc(trTarih(d));
+  if(k==='imzaGorsel'){
+    return imzaGecerli(d)
+      ? '<img src="'+d+'" alt="imza" style="max-width:170px;max-height:54px;'
+        + 'border:1px solid #e2e6ec;border-radius:4px;background:#fff;padding:2px">'
+      : '<span style="color:#aaa">—</span>';
+  }
   return esc(String(d));
 }
 function detayTablo(v){
@@ -1916,6 +2066,8 @@ function csvAktar(){
       if(a[0]==='ogrenim')  d = d ? d+' - '+(OGRENIM_ETIKET[d]||'') : '';
       if(a[0]==='sgkTur')   d = d ? d+' - '+(SGK_ETIKET[d]||'') : '';
       if(/Tarihi$/.test(a[0])) d = trTarih(d);
+      /* imza resmi CSV'ye yazılmaz, yalnız var/yok bilgisi çıkar */
+      if(a[0]==='imzaGorsel') d = imzaGecerli(d) ? 'VAR' : '';
       return d;
     }).concat([v.olusturma||'', v.guncelleme||'']);
     return h;
@@ -2095,6 +2247,41 @@ function kilavuzDoldur(){
   +'background:#2b6cb0;color:#fff;font-weight:bold;font-size:12px;padding:7px 14px;border-radius:4px;cursor:pointer;">'
   +'⬇ DIYANET-SEN.ico simgesini indir</span></div>'
 
+  +'<div class="kg-h3">Ekrandan imza (telefon / tablet)</div>'
+  +'<ul class="kg-ul">'
+  +'<li><b>Bu panel yalnızca telefon ve tablette görünür</b> — imza zaten orada atılır. '
+  +'Bilgisayarda yer kaplamasın diye gizlidir; yalnızca imzası alınmış bir kaydı açtığınızda '
+  +'orada da görünür, böylece imzayı bilgisayardan da silebilirsiniz.</li>'
+  +'<li>Telefon/tablette veri girişi sütununun en altındaki <b>KAMU GÖREVLİSİNİN İMZASI</b> '
+  +'panelinde <b>✍️ EKRANA İMZA AT</b> düğmesine basınca tam ekran bir imza penceresi açılır.</li>'
+  +'<li>Telefonu ya da tableti personele uzatın; beyaz alana <b>parmağıyla</b> (kalemi varsa kalemle) '
+  +'imzasını atsın. Beğenmezse <b>Temizle</b> ile silip yeniden atabilir.</li>'
+  +'<li><b>✔ İMZAYI İŞLE</b> dediğinizde imza belgedeki imza yerine basılır: EK-1\'de '
+  +'<b>KAMU GÖREVLİSİNİN İMZASI</b> kutusundaki “İMZA” yazısının altına, EK-3\'te '
+  +'<b>Kamu Görevlisinin İmzası</b> yazısının üstüne.</li>'
+  +'<li>İmza kişinin kaydıyla birlikte saklanır; kaydı sonra açtığınızda imza da gelir ve '
+  +'<b>YEDEK AL</b> dosyasına girer. <b>Sil</b> düğmesiyle kaldırabilirsiniz.</li>'
+  +'<li>İmza <b>yalnız bu cihazda</b> kalır, hiçbir yere gönderilmez. Excel/CSV dışa aktarımında '
+  +'resim yazılmaz, sadece <b>VAR</b> bilgisi çıkar.</li>'
+  +'<li>Kalemli tablette basınç da okunur: bastırınca çizgi kalınlaşır. Pencereyi '
+  +'<b>Esc</b> ile kapatabilirsiniz.</li>'
+  +'</ul>'
+
+  +'<div class="kg-h3">Sendikalar sekmesi</div>'
+  +'<ul class="kg-ul">'
+  +'<li><b>Kayıtlı Üyeler</b>\'in yanındaki <b>Sendikalar</b> sekmesinde, Diyanet hizmet kolundaki '
+  +'sendikaların <b>adı, dosya numarası ve adresi</b> hazır durur.</li>'
+  +'<li><b>EK-3 Çekilme Formu</b>\'nda <b>Sendika Adı</b> kutusuna tıklayınca bu liste açılır. '
+  +'Seçtiğiniz anda <b>Hizmet Kolu (11), Dosya No ve Sendika Adresi</b> kendiliğinden dolar — '
+  +'tek tek yazmanıza gerek kalmaz. Yazarak da arayabilirsiniz.</li>'
+  +'<li>Resmî formda adres kutusu <b>18 hanedir</b>; bu yüzden forma adresin kısa hâli '
+  +'(ilçe/il) basılır. Tablodaki <b>FORMA YAZILAN</b> sütunu bunu gösterir.</li>'
+  +'<li>Listede olmayan bir sendikayı üstteki kutulardan <b>elle ekleyebilir</b>, ya da '
+  +'<b>Dosya Seç</b> ile <b>Sendika Adı · Dosya No · Adres</b> sütunlu bir Excel/CSV yükleyebilirsiniz.</li>'
+  +'<li>Hazır listedeki sendikalar 🔒 kilitlidir, yanlışlıkla silinmez. <b>Temizle</b> yalnızca '
+  +'sizin eklediklerinizi siler. Eklediğiniz sendikalar <b>YEDEK AL</b> dosyasına da girer.</li>'
+  +'</ul>'
+
   +'<div class="kg-h3">Yazdırma</div>'
   +'<ul class="kg-ul">'
   +'<li><b>Önizle</b> ile kağıda basılacak hali büyütüp küçülterek kontrol edin, <b>Yazdır</b> ile çıktı alın.</li>'
@@ -2147,6 +2334,15 @@ function kilavuzDoldur(){
   +'<div class="kg-p">Kutucuk sayıları, satır yükseklikleri, gri tonlar ve amblemler, elinizdeki '
   +'<b>uyelikformu2026.pdf</b> taramasından 300 dpi ölçülerek çıkarılmıştır. EK-3 sayfası ise '
   +'<b>istifa_formu.doc</b> aslındaki gibi renksiz ve ince çizgilidir.</div>'
+
+  +'<div class="kg-h3">Programı sıfırlama</div>'
+  +'<div class="kg-p">Programı bir başkasına verecekseniz ya da baştan başlamak isterseniz '
+  +'aşağıdaki düğme <b>bu cihazdaki bütün bilgileri</b> siler: formlar, kayıtlı üyeler, geçmiş '
+  +'kayıtlar, personel listesi ve sizin eklediğiniz sendikalar. Basınca önce <b>yedek almayı</b> '
+  +'teklif eder. Hazır sendika listesi ve programın kendisi durur.</div>'
+  +'<div style="margin:6px 0 14px">'
+  +'  <button type="button" class="btn danger" id="btnSifirla" style="padding:9px 16px;font-size:12.5px">'
+  +'  Programı Sıfırla</button></div>'
 
   +'<div class="kg-h3">Programı hazırlayan</div>'
   +'<div class="kunye">'
@@ -2839,6 +3035,258 @@ function renderSheet7(){
   });
 }
 /* ============================================================
+   SEKME 8 — SENDİKALAR
+   Diyanet ve Vakıf Hizmetleri (11) hizmet kolundaki sendikaların
+   adı, Bakanlıkça verilen dosya numarası ve adresi.
+   Hazır liste SABİTTİR, silinemez; kullanıcının elle eklediği ya da
+   dosyadan yüklediği sendikalar ayrıca bu cihazda saklanır.
+   EK-3'te "Sendika Adı" kutusundan seçilir, alanlar kendiliğinden dolar.
+   ============================================================ */
+const SENDIKA_SABIT = [
+  {ad:'TÜRK DİYANET VAKIF-SEN', no:'9', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'DİYANET-SEN', no:'18', adres:'Zübeyde Hanım Mh. Sebze Bahçeleri Cd. No:86, 06400 Altındağ/Ankara', kisa:'ALTINDAĞ ANKARA'},
+  {ad:'DİVES', no:'74', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'BAĞIMSIZ DİYANET -SEN', no:'115', adres:'Mustafa Kemal Mahallesi, 2128. Sk. No:7/6 Kat:2 06530 Çankaya/Ankara', kisa:'ÇANKAYA ANKARA'},
+  {ad:'DİVA-SEN', no:'118', adres:'Maltepe Mahallesi Gazi Mustafa Kemal Bulvarı Aytuna Apt. 47/4 Çankaya / Ankara', kisa:'ÇANKAYA ANKARA'},
+  {ad:'DİN-BİR-SEN', no:'149', adres:'Gazi Mustafa Kemal Blv. Varlıer Apt. No:39/20 Çankaya / Ankara', kisa:'ÇANKAYA ANKARA'},
+  {ad:'HAK BİR-SEN', no:'205', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'ANADOLU DİYANET VAKIF-SEN', no:'240', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'DİYANET HAK SENDİKASI', no:'265', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'TEK BİR-SEN', no:'267', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'ÖZ DİYANET-SEN', no:'271', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'DİYANET BİR-SEN', no:'279', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'DEVA-BİR SEN', no:'290', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'MİL DİYANET-SEN', no:'330', adres:'Menekşe 1 Sokak Orkide Apartmanı No: 8 B Blok/19 Kızılay/ANKARA', kisa:'KIZILAY ANKARA'},
+  {ad:'DİYANET BİRLİK-SEN', no:'336', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'DİYANET HAK VE ADALET SEN', no:'347', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'TÜM KAMU SEN DİYANET', no:'365', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'VAZİFE MALULLERİ YURT ÇOCUKLARI VE ENGELLİ DİYANET BİRLİK SEN', no:'374', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'ADİL SEN', no:'380', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'DİYANET KARDEŞLİĞİ SEN', no:'394', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'DİYANET İHYA SEN', no:'397', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'DİYANET GÖR SEN', no:'411', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'VATANSEVER SEN-DİYANET', no:'451', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'UZMAN DİYANET-SEN', no:'454', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'AHAD-SEN', no:'477', adres:'Ankara', kisa:'ANKARA'},
+  {ad:'DİYANET İZ-SEN', no:'487', adres:'Ankara', kisa:'ANKARA'}
+];
+const ANH_SENDIKA = 'dsen_sendikalar_v1';
+let sendikaAramaMetni = '';
+
+function sendikaEklenen(){
+  try{
+    const h = localStorage.getItem(ANH_SENDIKA);
+    const d = h ? JSON.parse(h) : [];
+    return Array.isArray(d) ? d : [];
+  }catch(e){ return []; }
+}
+function sendikaEklenenYaz(liste){
+  try{ localStorage.setItem(ANH_SENDIKA, JSON.stringify(liste)); }catch(e){}
+}
+/* Hazır liste + elle eklenenler; ei = eklenenler dizisindeki sırası */
+function sendikaHepsi(){
+  const out = SENDIKA_SABIT.map(x => ({ad:x.ad, no:x.no, adres:x.adres, kisa:x.kisa, sabit:true, ei:-1}));
+  sendikaEklenen().forEach(function(x, i){
+    out.push({ad:x.ad, no:x.no||'', adres:x.adres||'', kisa:x.kisa||sendikaKisaAdres(x.adres), sabit:false, ei:i});
+  });
+  return out;
+}
+/* Görünen ad: büyük harf, fazla boşluklar atılmış */
+function sendikaAd(ad){ return buyuk(String(ad||'')).replace(/\s+/g,' ').trim(); }
+/* Karşılaştırma anahtarı: I/İ, tire ve boşluk farkları aynı sayılsın ki
+   "DİYANET-SEN", "DIYANET SEN" ve "DİYANETSEN" iki kez eklenmesin. */
+function sendikaAnahtar(ad){
+  return sendikaAd(ad).replace(/İ/g,'I').replace(/[^0-9A-ZÇĞÖŞÜI]/g,'');
+}
+function sendikaBul(ad){
+  const a = sendikaAnahtar(ad);
+  if(!a) return null;
+  return sendikaHepsi().find(x => sendikaAnahtar(x.ad) === a) || null;
+}
+function sendikaAdListesi(){ return sendikaHepsi().map(x => x.ad); }
+
+/* Uzun adresi resmî formdaki 18 kutuya sığacak "İLÇE İL" biçimine indirir */
+function sendikaKisaAdres(adres){
+  const a = String(adres||'').replace(/\s+/g,' ').trim();
+  if(!a) return '';
+  const m = a.match(/([^\s,\/]+)\s*\/\s*([^\s,\/]+)\s*$/);
+  const k = m ? (m[1] + ' ' + m[2]) : a.split(',').pop().trim();
+  return buyuk(k).replace(/\s+/g,' ').trim().slice(0,18);
+}
+
+/* EK-3'te sendika seçilince ilgili satırlar dolar */
+function sendikaSecildi(ad){
+  const x = sendikaBul(ad);
+  if(!x) return;
+  durumEK3.hizmetKolu    = '11';
+  durumEK3.dosyaNo       = String(x.no||'').replace(/\D/g,'').slice(0,3);
+  durumEK3.sendikaAdresi = x.kisa || sendikaKisaAdres(x.adres);
+  bildir(x.ad + ' seçildi — hizmet kolu 11, dosya no ' + (durumEK3.dosyaNo || '—') + ', adres yazıldı.');
+}
+
+function sendikaElleEkle(){
+  const al = (id)=>{ const e = document.getElementById(id); return e ? e.value : ''; };
+  const ad = sendikaAd(al('senAd'));
+  if(!ad){ bildir('Sendika adı yazınız.'); return; }
+  if(sendikaBul(ad)){ bildir('Bu sendika listede zaten var.'); return; }
+  const adres = String(al('senAdres')).replace(/\s+/g,' ').trim();
+  const l = sendikaEklenen();
+  l.push({ad:ad, no:String(al('senNo')).replace(/\D/g,''), adres:adres, kisa:sendikaKisaAdres(adres)});
+  sendikaEklenenYaz(l);
+  sendikaAramaMetni = '';
+  renderSheet8();
+  bildir(ad + ' eklendi.');
+}
+
+/* Dosyadan (xlsx / xls / csv) sendika listesi ekler.
+   Sütunlar başlıklarından bulunur: Sendika Adı · Dosya No · Adres */
+function sendikaDosyadanAl(sonuc){
+  const bas = (sonuc.headers||[]).map(h => String(h).toLocaleLowerCase('tr'));
+  const bul = (anahtarlar)=> bas.findIndex(h => anahtarlar.some(a => h.indexOf(a) >= 0));
+  let iAd = bul(['sendika ad','sendika']);
+  if(iAd < 0) iAd = bul(['ad']);
+  const iNo    = bul(['dosya']);
+  const iAdres = bul(['adres']);
+  if(iAd < 0) throw new Error('Dosyada "Sendika Adı" başlıklı bir sütun bulunamadı.\n\n'
+    + 'Bulunan başlıklar:\n' + (sonuc.headers||[]).join(' | '));
+  const l = sendikaEklenen();
+  const varOlan = {};
+  sendikaHepsi().forEach(x => { varOlan[sendikaAnahtar(x.ad)] = 1; });
+  let n = 0;
+  (sonuc.rows||[]).forEach(function(r){
+    const ad = sendikaAd(r[iAd]);
+    const anh = sendikaAnahtar(ad);
+    if(!ad || varOlan[anh]) return;
+    varOlan[anh] = 1;
+    const adres = iAdres >= 0 ? String(r[iAdres]||'').replace(/\s+/g,' ').trim() : '';
+    l.push({ad:ad, no: iNo >= 0 ? String(r[iNo]||'').replace(/\D/g,'') : '',
+            adres:adres, kisa:sendikaKisaAdres(adres)});
+    n++;
+  });
+  sendikaEklenenYaz(l);
+  return n;
+}
+
+function renderSheet8(){
+  const govde = document.getElementById('s8-root'); if(!govde) return;
+  const hepsi = sendikaHepsi();
+  const eklenen = sendikaEklenen().length;
+  const q = sendikaAramaMetni.trim().toLocaleLowerCase('tr');
+  const suz = q ? hepsi.filter(x => (x.ad+' '+x.no+' '+x.adres).toLocaleLowerCase('tr').indexOf(q) >= 0) : hepsi;
+
+  govde.innerHTML =
+    '<h2 class="p-baslik">Sendikalar</h2>'
+  + '<div class="p-not"><b>Diyanet ve Vakıf Hizmetleri (11)</b> hizmet kolundaki sendikalar. '
+  + '<b>Çekilme Formu (EK-3)</b> sekmesindeki <b>Sendika Adı</b> kutusuna tıklayınca bu liste açılır; '
+  + 'seçtiğinizde <b>hizmet kolu, dosya no ve adres</b> kendiliğinden dolar. '
+  + 'Liste yalnızca bu cihazda saklanır, hiçbir yere gönderilmez.</div>'
+  + '<div class="personel-upload no-print">'
+  +   '<label class="btn" style="display:inline-flex;align-items:center;">'
+  +     '<svg class="ikon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>' + 'Dosya Seç'
+  +     '<input type="file" id="sendikaDosya" accept=".xlsx,.xls,.csv" style="display:none;">'
+  +   '</label>'
+  +   '<button class="btn secondary" id="sendikaTemizle"' + (eklenen ? '' : ' disabled') + '>'
+  +     '<svg class="ikon" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>' + 'Temizle</button>'
+  +   '<span class="hint" id="sendikaDurumu">Toplam <b>' + hepsi.length + '</b> sendika — '
+  +     SENDIKA_SABIT.length + ' hazır'
+  +     (eklenen ? ' + <b>' + eklenen + '</b> sizin eklediğiniz' : '') + '</span>'
+  + '</div>'
+  + '<div class="sen-ekle no-print">'
+  +   '<input type="text" class="sen-ad" id="senAd" placeholder="Sendika adı" maxlength="80">'
+  +   '<input type="text" class="sen-no" id="senNo" placeholder="Dosya no" inputmode="numeric" maxlength="4">'
+  +   '<input type="text" class="sen-adres" id="senAdres" placeholder="Adres — örn. Çankaya/Ankara" maxlength="140">'
+  +   '<button type="button" class="btn" id="senEkle">+ Ekle</button>'
+  + '</div>'
+  + '<input type="search" class="p-arama no-print" id="sendikaArama" '
+  +   'placeholder="Sendika adı, dosya no veya adrese göre ara…" value="' + esc(sendikaAramaMetni) + '">'
+  + (suz.length
+     ? '<div class="sen-sar"><table class="personel-table"><thead><tr>'
+       + '<th style="width:34px">#</th><th>SENDİKA ADI</th><th style="width:86px">DOSYA NO</th>'
+       + '<th>ADRES</th><th style="width:140px">FORMA YAZILAN</th><th style="width:64px"></th>'
+       + '</tr></thead><tbody>'
+       + suz.map(function(x, i){
+           return '<tr>'
+             + '<td>' + (i+1) + '</td>'
+             + '<td><b>' + esc(x.ad) + '</b>'
+             +   (x.sabit ? '' : '<span class="sen-etiket">eklendi</span>') + '</td>'
+             + '<td>' + esc(x.no) + '</td>'
+             + '<td>' + esc(x.adres) + '</td>'
+             + '<td class="sen-kisa">' + esc(x.kisa || sendikaKisaAdres(x.adres)) + '</td>'
+             + '<td>' + (x.sabit
+                 ? '<span class="sen-kilit" title="Hazır liste — silinemez">🔒</span>'
+                 : '<button type="button" class="btn danger" data-sen-sil="' + x.ei + '">Sil</button>')
+             + '</td></tr>';
+         }).join('')
+       + '</tbody></table></div>'
+     : '<div class="p-not" style="margin-top:10px">"' + esc(sendikaAramaMetni) + '" ile eşleşen sendika yok.</div>')
+  + '<div class="bilgi-not">Hazır listedeki ' + SENDIKA_SABIT.length + ' sendika 🔒 kilitlidir, silinemez. '
+  + 'Yeni sendikayı yukarıdaki kutulardan elle ekleyebilir ya da <b>Dosya Seç</b> ile '
+  + '<b>Sendika Adı · Dosya No · Adres</b> sütunlu bir Excel/CSV dosyası yükleyebilirsiniz. '
+  + '<b>Temizle</b> yalnızca sizin eklediklerinizi siler. '
+  + 'Resmî formdaki adres kutusu 18 hanedir; <b>FORMA YAZILAN</b> sütunu oraya basılacak kısa hâli gösterir.</div>';
+
+  s8Olaylar();
+}
+
+function s8Olaylar(){
+  const ara = document.getElementById('sendikaArama');
+  if(ara) ara.addEventListener('input', function(){
+    sendikaAramaMetni = ara.value; renderSheet8();
+    const y = document.getElementById('sendikaArama');
+    if(y){ y.focus(); y.setSelectionRange(y.value.length, y.value.length); }
+  });
+
+  const ekle = document.getElementById('senEkle');
+  if(ekle) ekle.addEventListener('click', sendikaElleEkle);
+  ['senAd','senNo','senAdres'].forEach(function(id){
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); sendikaElleEkle(); }
+    });
+  });
+
+  document.querySelectorAll('#s8-root [data-sen-sil]').forEach(function(b){
+    b.addEventListener('click', function(){
+      const i = +b.dataset.senSil;
+      const l = sendikaEklenen();
+      if(!l[i]) return;
+      if(!confirm('"' + l[i].ad + '" listeden silinsin mi?')) return;
+      l.splice(i, 1); sendikaEklenenYaz(l); renderSheet8();
+      bildir('Sendika silindi.');
+    });
+  });
+
+  const temizle = document.getElementById('sendikaTemizle');
+  if(temizle) temizle.addEventListener('click', function(){
+    const n = sendikaEklenen().length;
+    if(!n){ bildir('Silinecek eklenmiş sendika yok.'); return; }
+    if(!confirm('Sizin eklediğiniz ' + n + ' sendika silinsin mi?\n\n'
+              + 'Hazır listedeki ' + SENDIKA_SABIT.length + ' sendika kalır.')) return;
+    sendikaEklenenYaz([]); renderSheet8();
+    bildir('Eklenen sendikalar silindi.');
+  });
+
+  const dosya = document.getElementById('sendikaDosya');
+  if(dosya) dosya.addEventListener('change', async function(){
+    const f = this.files && this.files[0];
+    this.value = '';
+    if(!f) return;
+    const d = document.getElementById('sendikaDurumu');
+    if(d) d.textContent = 'Okunuyor…';
+    try{
+      const sonuc = await personelDosyaOku(f);
+      const n = sendikaDosyadanAl(sonuc);
+      sendikaAramaMetni = '';
+      renderSheet8();
+      bildir(n ? (n + ' sendika eklendi.') : 'Dosyadaki sendikaların hepsi listede zaten var.');
+    }catch(hata){
+      alert('Dosya okunamadı:\n\n' + hata.message);
+      renderSheet8();
+    }
+  });
+}
+
+/* ============================================================
    YEDEKLEME — bütün kayıtları tek dosyaya al / geri yükle
    Ayda bir yedek alınması hatırlatılır.
    ============================================================ */
@@ -3118,6 +3566,7 @@ function sekmeAc(id){
   if(id==='s2' && !s2Kuruldu) kurSheet2();
   if(id==='s3') renderSheet3();
   if(id==='s4') renderSheet4();
+  if(id==='s8') renderSheet8();
   if(id==='s6') renderSheet6();
   if(id==='s7') renderSheet7();
   if(id==='s1'||id==='s2'){ yenile(); belgeOlcekle(); }
@@ -3143,6 +3592,182 @@ function bildir(mesaj){
   clearTimeout(toastZaman);
   toastZaman = setTimeout(()=>t.classList.remove('show'), 2600);
 }
+
+/* ============================================================
+   EKRANDAN İMZA — parmak / kalem / fare ile çizim
+   Tuvale çizilen imza kırpılır, PNG'ye çevrilir ve durumda saklanır.
+   Hiçbir yere gönderilmez; yalnız bu cihazda kalır.
+   ============================================================ */
+/* İmza mürekkebi — tükenmez kalem mavisi */
+const KGI_MUREKKEP = '#12329B';
+/* Kalem ucu: hızlı çizince incelir, yavaş/bastırınca kalınlaşır */
+const KGI_UC       = 4.2;    /* normal kalınlık (px) */
+const KGI_INCE     = 2.4;    /* en ince */
+const KGI_KALIN    = 6.2;    /* en kalın */
+const kgiDurum = { hedef:'EK1', ctx:null, ciziyor:false, bos:true,
+                   sonX:0, sonY:0, ortX:0, ortY:0, olcek:1,
+                   kalinlik:KGI_UC, zaman:0 };
+
+function kgiTuval(){ return document.getElementById('kgiTuval'); }
+
+/* Tuvali ekran çözünürlüğüne göre kurar (aynı zamanda temizler) */
+function kgiKur(){
+  const c = kgiTuval(); if(!c) return;
+  const o = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+  const g = c.clientWidth, y = c.clientHeight;
+  if(!g || !y) return;
+  c.width = Math.round(g*o); c.height = Math.round(y*o);
+  const x = c.getContext('2d');
+  x.setTransform(o,0,0,o,0,0);
+  x.clearRect(0,0,g,y);
+  x.lineWidth = KGI_UC; x.lineCap = 'round'; x.lineJoin = 'round'; x.strokeStyle = KGI_MUREKKEP;
+  kgiDurum.ctx = x; kgiDurum.olcek = o; kgiDurum.bos = true; kgiDurum.ciziyor = false;
+  kgiDurum.kalinlik = KGI_UC;
+}
+function kgiNokta(e){
+  const r = kgiTuval().getBoundingClientRect();
+  return { x: e.clientX - r.left, y: e.clientY - r.top };
+}
+/* Kalem ucu kalınlığı: kalemin basıncı varsa ondan, yoksa el hızından.
+   Ani sıçramasın diye önceki kalınlıkla yumuşatılır. */
+function kgiKalinlik(e, hiz){
+  let hedef;
+  if(e && e.pointerType === 'pen' && e.pressure > 0){
+    hedef = KGI_INCE + (KGI_KALIN - KGI_INCE) * Math.min(1, e.pressure * 1.35);
+  } else {
+    hedef = KGI_KALIN - hiz * 0.075;          /* hızlandıkça incelir */
+  }
+  if(hedef < KGI_INCE)  hedef = KGI_INCE;
+  if(hedef > KGI_KALIN) hedef = KGI_KALIN;
+  kgiDurum.kalinlik = kgiDurum.kalinlik * 0.65 + hedef * 0.35;
+  return kgiDurum.kalinlik;
+}
+function kgiBasla(e){
+  const c = kgiTuval(); if(!c || !kgiDurum.ctx) return;
+  e.preventDefault();
+  try{ c.setPointerCapture(e.pointerId); }catch(err){}
+  const n = kgiNokta(e);
+  kgiDurum.ciziyor = true;
+  kgiDurum.sonX = kgiDurum.ortX = n.x;
+  kgiDurum.sonY = kgiDurum.ortY = n.y;
+  kgiDurum.zaman = (e.timeStamp || Date.now());
+  kgiDurum.kalinlik = KGI_UC;
+  const x = kgiDurum.ctx;
+  x.beginPath(); x.arc(n.x, n.y, KGI_UC/2, 0, Math.PI*2);
+  x.fillStyle = KGI_MUREKKEP; x.fill();
+  kgiDurum.bos = false;
+}
+function kgiCiz(e){
+  if(!kgiDurum.ciziyor) return;
+  e.preventDefault();
+  const x = kgiDurum.ctx, n = kgiNokta(e);
+  const dx = n.x - kgiDurum.sonX, dy = n.y - kgiDurum.sonY;
+  const uzunluk = Math.sqrt(dx*dx + dy*dy);
+  const simdi = (e.timeStamp || Date.now());
+  const sure  = Math.max(8, simdi - kgiDurum.zaman);   /* ms */
+  kgiDurum.zaman = simdi;
+  const hiz = uzunluk / sure * 16;                      /* ~kare başına px */
+
+  const ox = (kgiDurum.sonX + n.x)/2, oy = (kgiDurum.sonY + n.y)/2;
+  x.lineWidth = kgiKalinlik(e, hiz);
+  x.beginPath();
+  x.moveTo(kgiDurum.ortX, kgiDurum.ortY);
+  x.quadraticCurveTo(kgiDurum.sonX, kgiDurum.sonY, ox, oy);
+  x.stroke();
+  kgiDurum.ortX = ox; kgiDurum.ortY = oy;
+  kgiDurum.sonX = n.x; kgiDurum.sonY = n.y;
+}
+function kgiBitir(){
+  if(!kgiDurum.ciziyor) return;
+  kgiDurum.ciziyor = false;
+  const x = kgiDurum.ctx;
+  x.lineWidth = kgiDurum.kalinlik;
+  x.beginPath(); x.moveTo(kgiDurum.ortX, kgiDurum.ortY);
+  x.lineTo(kgiDurum.sonX, kgiDurum.sonY); x.stroke();
+}
+
+/* Boş kenarları kırpar, gerekirse küçültür, saydam zeminli PNG döndürür */
+function kgiKirp(){
+  const c = kgiTuval();
+  let d;
+  try{ d = c.getContext('2d').getImageData(0,0,c.width,c.height).data; }
+  catch(e){ return c.toDataURL('image/png'); }
+  let x1 = c.width, y1 = c.height, x2 = -1, y2 = -1;
+  for(let y=0; y<c.height; y++){
+    const sat = y*c.width;
+    for(let x=0; x<c.width; x++){
+      if(d[(sat+x)*4+3] > 12){
+        if(x<x1) x1=x; if(x>x2) x2=x;
+        if(y<y1) y1=y; if(y>y2) y2=y;
+      }
+    }
+  }
+  if(x2 < 0) return '';
+  const bos = Math.round(6*kgiDurum.olcek);
+  x1 = Math.max(0, x1-bos); y1 = Math.max(0, y1-bos);
+  x2 = Math.min(c.width-1, x2+bos); y2 = Math.min(c.height-1, y2+bos);
+  const g = x2-x1+1, y_ = y2-y1+1;
+  const ENB = 720;                       /* dosya şişmesin diye üst sınır */
+  let hg = g, hy = y_;
+  if(g > ENB){ hg = ENB; hy = Math.max(1, Math.round(y_*ENB/g)); }
+  const k = document.createElement('canvas');
+  k.width = hg; k.height = hy;
+  k.getContext('2d').drawImage(c, x1, y1, g, y_, 0, 0, hg, hy);
+  return k.toDataURL('image/png');
+}
+
+function kgiAc(hangi){
+  kgiDurum.hedef = (hangi === 'EK3') ? 'EK3' : 'EK1';
+  const bas = document.getElementById('kgiBaslik');
+  if(bas) bas.textContent = 'KAMU GÖREVLİSİNİN İMZASI — '
+        + (kgiDurum.hedef === 'EK3' ? 'EK-3 ÇEKİLME FORMU' : 'EK-1 ÜYELİK FORMU');
+  document.getElementById('kgiOrt').classList.add('acik');
+  document.body.style.overflow = 'hidden';
+  setTimeout(kgiKur, 40);
+}
+function kgiKapat(){
+  document.getElementById('kgiOrt').classList.remove('acik');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('click', function(e){
+  const al = e.target.closest('[data-kgi-al]');
+  if(al){ kgiAc(al.dataset.kgiAl); return; }
+
+  const sil = e.target.closest('[data-kgi-sil]');
+  if(sil){
+    const d = (sil.dataset.kgiSil === 'EK3') ? durumEK3 : durumEK1;
+    if(!imzaGecerli(d.imzaGorsel)){ bildir('Silinecek imza yok.'); return; }
+    if(!confirm('Ekrandan alınan imza silinsin mi?')) return;
+    d.imzaGorsel = ''; yenile(); bildir('İmza silindi.');
+    return;
+  }
+  if(e.target.closest('#kgiTemizle')){ kgiKur(); return; }
+  if(e.target.closest('#kgiVazgec')){ kgiKapat(); return; }
+  if(e.target.closest('#kgiKaydet')){
+    if(kgiDurum.bos){ bildir('Önce ekrana imza atınız.'); return; }
+    const veri = kgiKirp();
+    if(!imzaGecerli(veri)){ bildir('İmza okunamadı, lütfen tekrar deneyiniz.'); return; }
+    ((kgiDurum.hedef === 'EK3') ? durumEK3 : durumEK1).imzaGorsel = veri;
+    kgiKapat(); yenile();
+    bildir('İmza forma işlendi.');
+    return;
+  }
+});
+
+(function kgiOlaylar(){
+  const c = kgiTuval(); if(!c) return;
+  c.addEventListener('pointerdown', kgiBasla);
+  c.addEventListener('pointermove', kgiCiz);
+  c.addEventListener('pointerup', kgiBitir);
+  c.addEventListener('pointercancel', kgiBitir);
+  window.addEventListener('pointerup', kgiBitir);
+  /* Ekran döndürülürse tuval yeniden kurulur (çizim varsa dokunulmaz) */
+  window.addEventListener('resize', function(){
+    const o = document.getElementById('kgiOrt');
+    if(o && o.classList.contains('acik') && kgiDurum.bos) kgiKur();
+  });
+})();
 
 /* ---------- Genel giriş olayları ---------- */
 document.addEventListener('input', function(e){
@@ -3187,6 +3812,13 @@ document.addEventListener('click', function(e){
   catch(err){ inp.style.pointerEvents='auto'; inp.focus(); inp.click(); inp.style.pointerEvents='none'; }
 });
 
+/* İmza penceresi Esc ile kapanır */
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Escape') return;
+  const o = document.getElementById('kgiOrt');
+  if(o && o.classList.contains('acik')) kgiKapat();
+});
+
 /* ↓/Enter bir alt alana, ↑ bir üst alana geçsin */
 document.addEventListener('keydown', function(e){
   if(e.key!=='ArrowDown' && e.key!=='ArrowUp' && e.key!=='Enter') return;
@@ -3227,6 +3859,37 @@ document.getElementById('yedekDosya').addEventListener('change', function(){
   const f = this.files && this.files[0];
   this.value = '';
   if(f) yedekGeriYukle(f);
+});
+
+/* ---------- Kılavuzdaki "Programı Sıfırla" düğmesi ---------- */
+function programiSifirla(){
+  const s = yedekSayim();
+  if(!confirm('PROGRAM SIFIRLANACAK\n\n'
+    + 'Silinecekler:\n'
+    + '· Formlardaki bilgiler\n'
+    + '· ' + s.uye + ' üye kaydı\n'
+    + '· ' + s.gecmis + ' geçmiş kayıt\n'
+    + '· ' + s.personel + ' satırlık personel listesi\n'
+    + '· Sizin eklediğiniz sendikalar\n\n'
+    + 'Bu işlem geri alınamaz. Devam edilsin mi?')) return;
+
+  const yedekle = (s.uye + s.gecmis + s.personel) > 0
+    && confirm('Silmeden önce yedek alınsın mı?\n\n'
+             + 'Tamam derseniz yedek dosyası bilgisayarınıza iner, sonra silme yapılır.');
+  if(yedekle) yedekAl();
+
+  setTimeout(function(){
+    if(!confirm('Son onay: bütün bilgiler silinsin mi?')) return;
+    try{
+      yedekAnahtarlari().forEach(k => localStorage.removeItem(k));
+      localStorage.removeItem(ANH_YEDEK);
+    }catch(e){}
+    bildir('Program sıfırlandı, yeniden açılıyor…');
+    setTimeout(function(){ location.reload(); }, 800);
+  }, yedekle ? 1400 : 0);
+}
+document.addEventListener('click', function(e){
+  if(e.target.closest('#btnSifirla')) programiSifirla();
 });
 
 /* ---------- Kılavuzdaki simge indirme düğmesi ---------- */
@@ -3414,7 +4077,7 @@ document.getElementById('btnGorunum').addEventListener('click', function(){
    ============================================================ */
 (function baslat(){
   try{ if(localStorage.getItem(ANH_GORUNUM)==='1') gorunumUygula(true); }catch(e){}
-  const vardi = taslakYukle();
+  try{ localStorage.removeItem(ANH_TASLAK); }catch(e){}   /* formlar bomboş açılır */
   personelGeriYukle();
   sabitleriUygula();
   if(!state.uyelikTarihi) state.uyelikTarihi = bugunISO();
@@ -3423,7 +4086,6 @@ document.getElementById('btnGorunum').addEventListener('click', function(){
   yedekDurumTazele();
   belgeOlcekle();
   telifBaslat();                 /* yapımcı bilgisi denetimi */
-  if(vardi && doluMu()) bildir('Kaldığınız yerden devam ediyorsunuz.');
 })();
 </script>
 </body>
