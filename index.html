@@ -1524,6 +1524,9 @@ function panelUyelik(sfx){
     + satir('Kurum Sicil', metin('kurumSicil','Kurum sicil no'))
     + satir('Kadro Ünvanı', comboAlan('kadroUnvani','unvanCombo'+sfx,'Ünvan seçiniz veya yazınız'))
     + satir('Kadro Ünvan Kodu', metin('kadroUnvanKodu','DPB kodu',5))
+    + (sfx==='2' ? '' : satir('Gsm',
+        '<input type="tel" data-k="gsm" value="'+esc(state.gsm)+'" placeholder="05xx xxx xx xx">',
+        'Personel listesinden kişi seçilince telefonu buraya kendiliğinden yazılır'))
     + '</div></div>';
 }
 function panelSgk(sfx){
@@ -1540,7 +1543,6 @@ function panelEK1(){
     + satir('Üye Kayıt Numarası', metin('uyeKayitNo','Sendika tarafından verilir'))
     + satir('Yön. Kurulu Karar Tarihi', tarihAlan('kararTarihi'))
     + satir('Yön. Kurulu Karar Sayısı', metin('kararSayisi','Örn: 2026/145'))
-    + satir('Gsm', '<input type="tel" data-k="gsm" value="'+esc(state.gsm)+'" placeholder="05xx xxx xx xx">')
     + satir('Mail', '<input type="email" data-k="mail" value="'+esc(state.mail)+'" placeholder="ornek@eposta.com">')
     + satir('Kan Grubu', metin('kanGrubu','Örn: 0 Rh+'))
     + '<div class="alt-baslik">ÜYELİĞE KABUL EDEN YETKİLİ</div>'
@@ -2551,8 +2553,18 @@ function personelSutunlari(){
     birim: bul(['birim','müftülük','muftuluk','kurum ad']),
     ogrenim: bul(['öğrenim','ogrenim','eğitim','egitim']),
     sicil: bul(['sicil']),
+    telefon: bul(['telefon','cep tel','cep no','gsm','cep']),
     derece: bul(['derece'])
   };
+}
+
+/* "5xx1234567", "+90 5xx...", "0(5xx)..." -> "05xx xxx xx xx" */
+function telefonDuzelt(metin){
+  let d = String(metin||'').replace(/\D/g,'');
+  if(d.length===12 && d.indexOf('90')===0) d = d.slice(2);
+  if(d.length===10 && d.charAt(0)==='5') d = '0'+d;
+  if(d.length!==11 || d.charAt(0)!=='0') return String(metin||'').trim();
+  return d.slice(0,4)+' '+d.slice(4,7)+' '+d.slice(7,9)+' '+d.slice(9,11);
 }
 
 /* "Erkek"/"E"/"1" -> '1' · "Kadın"/"K"/"2" -> '2' */
@@ -2638,6 +2650,7 @@ function personelFormaAktar(ri, secenek){
   }
   if(c.unvan >= 0 && al(c.unvan)){ state.kadroUnvani = buyuk(al(c.unvan)); gelenler.push('ünvan'); }
   if(c.sicil >= 0 && al(c.sicil)){ state.kurumSicil = buyuk(al(c.sicil)); gelenler.push('sicil'); }
+  if(c.telefon >= 0 && al(c.telefon)){ state.gsm = telefonDuzelt(al(c.telefon)); gelenler.push('telefon'); }
   if(c.ogrenim >= 0){
     const k = ogrenimKodu(al(c.ogrenim));
     if(k){ state.ogrenim = k; gelenler.push('öğrenim'); }
